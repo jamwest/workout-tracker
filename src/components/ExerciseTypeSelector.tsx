@@ -1,4 +1,5 @@
 import type { ExerciseType } from '../types'
+import { Input } from './ui'
 
 const OPTIONS: { value: ExerciseType; label: string }[] = [
   { value: 'weighted', label: 'Weighted' },
@@ -17,7 +18,7 @@ export function ExerciseTypeSelector({ value, onChange }: Readonly<Props>) {
       <legend>Exercise type</legend>
       {OPTIONS.map((opt) => (
         <label key={opt.value}>
-          <input
+          <Input
             type="radio"
             name="exercise-type"
             value={opt.value}

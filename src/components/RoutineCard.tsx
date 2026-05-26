@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { Routine, Exercise, ExerciseType } from '../types'
+import { Button, Card } from './ui'
 import { AddExerciseForm } from './AddExerciseForm'
 import { ConfirmDialog } from './ConfirmDialog'
 
@@ -64,15 +65,16 @@ export function RoutineCard({
   }
 
   return (
-    <div data-testid="routine-card">
-      <button
+    <Card data-testid="routine-card">
+      <Button
+        variant="ghost"
         aria-expanded={expanded}
         onClick={() => setExpanded((prev) => !prev)}
       >
         <span>{routine.name}</span>
         <span>{countLabel}</span>
         <span aria-hidden className={`chevron${expanded ? ' chevron--open' : ''}`}>›</span>
-      </button>
+      </Button>
 
       {expanded && (
         <div>
@@ -82,7 +84,9 @@ export function RoutineCard({
                 <span>{ex.name}</span>
                 <span>{TYPE_LABELS[ex.type]}</span>
                 {onRemoveExercise && (
-                  <button onClick={() => onRemoveExercise(ex)}>Delete exercise</button>
+                  <Button variant="ghost" onClick={() => onRemoveExercise(ex)}>
+                    Delete exercise
+                  </Button>
                 )}
               </li>
             ))}
@@ -90,8 +94,8 @@ export function RoutineCard({
           {onAddExercise && (
             <AddExerciseForm routineId={routine.id} onAdd={onAddExercise} />
           )}
-          <button onClick={handleStartWorkout}>Start Workout</button>
-          <button onClick={() => setDeleteDialogOpen(true)}>Delete Routine</button>
+          <Button variant="primary" onClick={handleStartWorkout}>Start Workout</Button>
+          <Button variant="danger" onClick={() => setDeleteDialogOpen(true)}>Delete Routine</Button>
         </div>
       )}
 
@@ -110,6 +114,6 @@ export function RoutineCard({
         onConfirm={handleDeleteConfirm}
         onCancel={handleDeleteCancel}
       />
-    </div>
+    </Card>
   )
 }

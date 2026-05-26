@@ -1,7 +1,7 @@
 ---
 title: Routines Page
 date: 2026-05-26
-status: in-progress
+status: complete
 issue: GH-1
 ---
 
