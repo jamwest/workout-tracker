@@ -1,8 +1,8 @@
 ---
 title: Routines Page
 date: 2026-05-26
-status: draft
-issue: ~
+status: in-progress
+issue: GH-1
 ---
 
 ## Problem Statement
