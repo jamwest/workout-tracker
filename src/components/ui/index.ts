@@ -12,3 +12,6 @@ export type { DialogProps } from "./Dialog";
 
 export { FieldError } from "./FieldError";
 export type { FieldErrorProps } from "./FieldError";
+
+export { NumberStepper } from "./NumberStepper";
+export type { NumberStepperProps } from "./NumberStepper";

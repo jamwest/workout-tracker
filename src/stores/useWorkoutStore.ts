@@ -57,6 +57,7 @@ interface WorkoutState {
     updates: Partial<Set>,
   ) => Promise<void>;
   addSet: (sessionExerciseId: string) => Promise<void>;
+  removeSet: (sessionExerciseId: string, setId: string) => Promise<void>;
   completeSession: () => Promise<void>;
   abandonSession: () => Promise<void>;
 }
@@ -256,6 +257,23 @@ export const useWorkoutStore = create<WorkoutState>((set, get) => ({
       exercises: activeSession.exercises.map((ex) =>
         ex.id === sessionExerciseId
           ? { ...ex, sets: [...ex.sets, newSet] }
+          : ex,
+      ),
+    };
+
+    await saveSession(updatedSession);
+    set({ activeSession: updatedSession });
+  },
+
+  removeSet: async (sessionExerciseId, setId) => {
+    const { activeSession } = get();
+    if (!activeSession) return;
+
+    const updatedSession: Session = {
+      ...activeSession,
+      exercises: activeSession.exercises.map((ex) =>
+        ex.id === sessionExerciseId
+          ? { ...ex, sets: ex.sets.filter((s) => s.id !== setId) }
           : ex,
       ),
     };
